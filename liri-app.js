@@ -104,6 +104,84 @@ function spotifyThisSong(song) {
     })
 };
 
+// Movie This
+function movieThis(movieName) {
+
+    if (movieName.trim() == '') {movieName = 'Mr. Nobody'};
+
+    let requestURL = "http://www.omdbapi.com/?t=" + movieName + "&apikey=trilogy";
+
+    // Asynchronous AJAX request
+    axios
+        .get(requestURL)
+        .then((bigResponse) => {
+
+            response = bigResponse.data
+
+            logThis(`>>Information about ${movieName}:`)
+            console.log(chalk`Information about ${movieName}:`)
+
+            if (response.Response === 'False') {
+                if (response.Error === 'Movie not found!') {
+
+                    logThis('>>No movie with that title was found.')
+                    console.log(chalk`{gray No movie with that title was found.}`)
+                } else {
+                    logThis('>>Unable to find results.')
+                    console.log(chalk`{gray Unable to find results.}`)
+                }
+            }
+            else {
+
+                let title = response.Title;
+                let year = response.Year;
+                let ratingIMDB;
+                let ratingTomates;
+                let country = response.Country;
+                let lang = response.Language;
+                let plot = response.Plot;
+                let actors = response.Actors;
+
+                for (let i = 0; i < response.Ratings.length; i++) {
+                    switch (response.Ratings[i].Source) {
+                        case "Internet Movie Database":
+                            ratingIMDB = response.Ratings[i].Value;
+                            break;
+                        case "Rotten Tomatoes":
+                            ratingTomates = response.Ratings[i].Value;
+                            break;
+                    }
+                }
+
+                // Set up conditional chalk formatting for ratings, while preserving original unformatted ratings for the log
+                let imdbPass;
+                let tomatoesPass;
+                if (parseFloat(ratingIMDB) > 5) {
+                    if (parseFloat(ratingIMDB) < 7) { imdbPass = chalk`{yellow ${ratingIMDB}}` }
+                    else { imdbPass = chalk`{green ${ratingIMDB}}` }
+                } else { imdbPass = chalk`{red ${ratingIMDB}}` }
+
+                if (parseFloat(ratingTomates) > 50) {
+                    if (parseFloat(ratingTomates) < 70) { tomatoesPass = chalk`{yellow ${ratingTomates}}` }
+                    else { tomatoesPass = chalk`{green ${ratingTomates}}` }
+                } else { tomatoesPass = chalk`{red ${ratingTomates}}` }
+
+
+
+                logThis(`>>${title} was released in ${year}.\n>>It stars ${actors}.\n>>It was made in ${country} and is in ${lang}.\n>>It scored ${ratingIMDB} on IMDB and ${ratingTomates} on RottenTomatoes.\n>>Here is a brief summary of the plot:\n>>${plot}`);
+
+                console.log(chalk`{cyan.bold ${title}} was released in ${year}.\nIt stars {magenta ${actors}}.\nIt was made in ${country} and is available in ${lang}.\nIt scored ${imdbPass} on IMDB and ${tomatoesPass} on RottenTomatoes.\nHere is a brief summary of the plot:\n${plot}`);
+
+
+            }
+        })
+        .catch((err) => {
+            logThis(`Encountered the following error: ${err.stack}`);
+            logThis('>>No movie found with that title.');
+            console.log(chalk.gray('No movie found with that title.'));
+        })
+};
+
 // Main loop
 switch (opperand) {
     case 'concert-this':
@@ -113,7 +191,7 @@ switch (opperand) {
         spotifyThisSong(argument);
         break;
     case 'movie-this':
-        console.log('Functionality not yet implemented');
+        movieThis(argument);
         break;
     case 'do-what-it-says':
         console.log('Functionality not yet implemented');
