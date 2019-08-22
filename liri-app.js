@@ -32,9 +32,7 @@ function logThis(text) {
 };
 
 // Initalize log file session
-logThis('');
-logThis(`Execution of user request: ${opperand} : ${argument}`);
-logThis(`Log begins at ${moment().format('YYYY-MM-DD h:mm:ss a')}`)
+logThis(`\n------------------------------------------------------------------\nExecution of user request: ${opperand} : ${argument}\nLog begins at ${moment().format('YYYY-MM-DD h:mm:ss a')}`);
 
 //Concert This
 function concertThis(artist) {
