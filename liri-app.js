@@ -83,7 +83,7 @@ function spotifyThisSong(song) {
             let preview = data.tracks.items[0].preview_url;
             let album = data.tracks.items[0].album.name;
 
-            if (!preview) { preview = 'Preview Not Available' }
+            if (!preview) {preview = 'Preview Not Available'}
 
             logThis("'" + songName + "'" + ' by ' + "'" + artist + "'" + '\n' + 'From the album ' + "'" + album + "'" + '\n' + 'Click here for a preview: ' + preview);
 
