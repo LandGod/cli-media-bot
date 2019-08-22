@@ -105,7 +105,7 @@ function spotifyThisSong(song) {
 // Movie This
 function movieThis(movieName) {
 
-    if (movieName.trim() == '') {movieName = 'Mr. Nobody'};
+    if (movieName.trim() == '') { movieName = 'Mr. Nobody' };
 
     let requestURL = "http://www.omdbapi.com/?t=" + movieName + "&apikey=trilogy";
 
@@ -180,20 +180,35 @@ function movieThis(movieName) {
         })
 };
 
-// Main loop
-switch (opperand) {
-    case 'concert-this':
-        concertThis(argument);
-        break;
-    case 'spotify-this-song':
-        spotifyThisSong(argument);
-        break;
-    case 'movie-this':
-        movieThis(argument);
-        break;
-    case 'do-what-it-says':
-        console.log('Functionality not yet implemented');
-        break;
+// Do what it says
+function doWhatItSays() {
+    fs.readFile('random.txt', 'utf-8', (err,data) => {
+        let lines = data.split('\n');
+        for (let i = 0; i < lines.length; i++) {
+            let lineParts = lines[i].split(' ');
+            mainLoop(lineParts[0], lineParts.slice(1).join(' '));
+        }
+    })
 };
+
+// Main loop
+function mainLoop(opp=opperand, arg=argument) {
+    switch (opp) {
+        case 'concert-this':
+            concertThis(arg);
+            break;
+        case 'spotify-this-song':
+            spotifyThisSong(arg);
+            break;
+        case 'movie-this':
+            movieThis(arg);
+            break;
+        case 'do-what-it-says':
+            doWhatItSays();
+            break;
+    };
+}
+
+mainLoop();
 
 console.log('Made it to EOF with no (synchronous) errors!\n\n');
