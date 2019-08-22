@@ -46,21 +46,30 @@ function concertThis(artist) {
         .then((bigResponse) => {
             let response = bigResponse.data
             console.log(`Upcomming concerts from ${argument}:`);
-            logThis(`Upcomming concerts from ${argument}:`)
-            for (let i = 0; i < response.length; i++) {
-                let date = moment(response[i].datetime);
-                let venue = response[i].venue.name;
-                let location = response[i].venue.city + ', ' + response[i].venue.region;
-                // let lineup = response[i].lineup
+            logThis(`>>Upcomming concerts from ${argument}:`)
 
-                logThis(`${date.format("dddd, MMMM Do YYYY")}` + ` at ` + `${venue}` + ` in ` + `${location}`)
+            if (!response[0]) {
+                logThis('>>No concerts found.');
+                console.log(chalk.gray('No concerts found.'));
+            }
+            else {
+                for (let i = 0; i < response.length; i++) {
+                    let date = moment(response[i].datetime);
+                    let venue = response[i].venue.name;
+                    let location = response[i].venue.city + ', ' + response[i].venue.region;
+                    // let lineup = response[i].lineup
 
-                console.log(chalk.whiteBright(`${date.format("dddd, MMMM Do YYYY")}`) + ` at ` + chalk.magentaBright.bold(`${venue}`) + ` in ` + chalk.cyan(`${location}`));
+                    logThis(`>>${date.format("dddd, MMMM Do YYYY")}` + ` at ` + `${venue}` + ` in ` + `${location}`)
 
+                    console.log(chalk.whiteBright(`${date.format("dddd, MMMM Do YYYY")}`) + ` at ` + chalk.magentaBright.bold(`${venue}`) + ` in ` + chalk.cyan(`${location}`));
+
+                }
             }
         })
         .catch((err) => {
-            throw (err)
+            logThis(`Encountered the following error: ${err.stack}`);
+            logThis('>>No concerts found.');
+            console.log(chalk.gray('No concerts found.'));
         })
 
 };
@@ -70,11 +79,11 @@ function spotifyThisSong(song) {
     if (!song || song == '') { song = 'The Sign, Ace of Base' }
     spotify.search({ type: 'track', query: song }, function (err, data) {
         if (err) {
-            throw (err);
+            logThis(`Encountered the following error: ${err.stack}`);
         }
 
         if (!data.tracks.items[0]) {
-            logThis('Error while retrieving data. Song not found.');
+            logThis('>>Error while retrieving data. Song not found.');
             console.log('Error while retrieving data. Song not found.');
         }
         else {
@@ -83,9 +92,9 @@ function spotifyThisSong(song) {
             let preview = data.tracks.items[0].preview_url;
             let album = data.tracks.items[0].album.name;
 
-            if (!preview) {preview = 'Preview Not Available'}
+            if (!preview) { preview = 'Preview Not Available' }
 
-            logThis("'" + songName + "'" + ' by ' + "'" + artist + "'" + '\n' + 'From the album ' + "'" + album + "'" + '\n' + 'Click here for a preview: ' + preview);
+            logThis(">>'" + songName + "'" + ' by ' + "'" + artist + "'" + '\n' + 'From the album ' + "'" + album + "'" + '\n' + 'Click here for a preview: ' + preview);
 
             console.log(chalk.cyan.bold(songName) + ' by ' + chalk.red(artist));
             console.log('From the album ' + chalk.magenta(album));
