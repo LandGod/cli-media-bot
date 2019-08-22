@@ -8,6 +8,10 @@ const moment = require('moment');
 const chalk = require('chalk');
 const fs = require('fs');
 
+// Import spotify api
+var Spotify = require('node-spotify-api');
+var spotify = new Spotify(keys.spotify);
+
 /* 
 App commands TODO:
 -concert-this
@@ -23,7 +27,7 @@ const argument = process.argv.slice(3).join(' ');
 // Output info to log file
 function logThis(text) {
     fs.appendFile('log.txt', text + '\n', 'utf8', (err) => {
-        if (err) throw err; 
+        if (err) throw err;
     });
 };
 
@@ -36,7 +40,7 @@ logThis(`Log begins at ${moment().format('YYYY-MM-DD h:mm:ss a')}`)
 function concertThis(artist) {
     let requestURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 
-    // Asynchronous axios request
+    // Asynchronous AJAX request
     axios
         .get(requestURL)
         .then((bigResponse) => {
@@ -61,13 +65,34 @@ function concertThis(artist) {
 
 };
 
+// Spotify this
+function spotifyThisSong(song) {
+    spotify.search({ type: 'track', query: song }, function (err, data) {
+        if (err) {
+            throw (err);
+        }
+
+        let artist = data.tracks.items[0].artists[0].name;
+        let songName = data.tracks.items[0].name;
+        let preview = data.tracks.items[0].preview_url;
+        let album = data.tracks.items[0].album.name;
+
+        logThis("'" + songName + "'" + ' by ' + "'" + artist + "'" + '\n' + 'From the album ' + "'" + album + "'" +  '\n' + 'Click here for a preview: ' + preview);
+
+        console.log(chalk.cyan.bold(songName) + ' by ' + chalk.red(artist));
+        console.log('From the album ' + chalk.magenta(album));
+        console.log('Click here for a preview: ' + chalk.gray(preview));
+
+    });
+};
+
 // Main loop
 switch (opperand) {
     case 'concert-this':
         concertThis(argument);
         break;
     case 'spotify-this-song':
-        console.log('Functionality not yet implemented');
+        spotifyThisSong(argument);
         break;
     case 'movie-this':
         console.log('Functionality not yet implemented');
