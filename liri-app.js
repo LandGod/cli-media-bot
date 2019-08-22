@@ -67,23 +67,32 @@ function concertThis(artist) {
 
 // Spotify this
 function spotifyThisSong(song) {
+    if (!song || song == '') { song = 'The Sign, Ace of Base' }
     spotify.search({ type: 'track', query: song }, function (err, data) {
         if (err) {
             throw (err);
         }
 
-        let artist = data.tracks.items[0].artists[0].name;
-        let songName = data.tracks.items[0].name;
-        let preview = data.tracks.items[0].preview_url;
-        let album = data.tracks.items[0].album.name;
+        if (!data.tracks.items[0]) {
+            logThis('Error while retrieving data. Song not found.');
+            console.log('Error while retrieving data. Song not found.');
+        }
+        else {
+            let artist = data.tracks.items[0].artists[0].name;
+            let songName = data.tracks.items[0].name;
+            let preview = data.tracks.items[0].preview_url;
+            let album = data.tracks.items[0].album.name;
 
-        logThis("'" + songName + "'" + ' by ' + "'" + artist + "'" + '\n' + 'From the album ' + "'" + album + "'" +  '\n' + 'Click here for a preview: ' + preview);
+            if (!preview) {preview = 'Preview Not Available'}
 
-        console.log(chalk.cyan.bold(songName) + ' by ' + chalk.red(artist));
-        console.log('From the album ' + chalk.magenta(album));
-        console.log('Click here for a preview: ' + chalk.gray(preview));
+            logThis("'" + songName + "'" + ' by ' + "'" + artist + "'" + '\n' + 'From the album ' + "'" + album + "'" + '\n' + 'Click here for a preview: ' + preview);
 
-    });
+            console.log(chalk.cyan.bold(songName) + ' by ' + chalk.red(artist));
+            console.log('From the album ' + chalk.magenta(album));
+            console.log('Click here for a preview: ' + chalk.gray(preview));
+        }
+
+    })
 };
 
 // Main loop
