@@ -20,9 +20,9 @@ The following are the 3 valid arguments for desired operation:
 * `movie-this` - Asks for information about the given movie.
 
 Here are some examples of valid queries:
-`node liri-app.js concert-this Dave Mathews Band`
-`node liri-app.js movie-this Jaws`
-`node liri-app.js spotify-this-song Let it Be`
+* `node liri-app.js concert-this Dave Mathews Band`
+* `node liri-app.js movie-this Jaws`
+* `node liri-app.js spotify-this-song Let it Be`
 
 **Tip**: While supplying additional search terms to spotify-this-song is not officially supported by this app, adding things like the artist name to the search query can sometimes help to find the correct song when songs with similar names are being returned, rather than the one the user desires. 
 
@@ -30,7 +30,7 @@ Here are some examples of valid queries:
 Using the `do-what-it-says` command, multiple calls in the above form can be made sequentially, without continued user interaction. In order to utilize this mode, simply create a text document in the same directory as `liri-app.js` and call it `random.txt`. You can then put any number of queries, in the above form, each on its own line, in the text document. Note that you should not supply the `node liri-app.js` portion of the querie, when entering them into the text docuemnt. 
 
 Once you have entered all desired queries in the document and saved it, you can then use the following command to execute all queries:
-`node liri-app.js do-what-it-says`
+```node liri-app.js do-what-it-says```
 
 Note that results may not always be displayed in the order they were asked for as information retrieval is done asynchronously.
 
