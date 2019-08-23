@@ -81,8 +81,8 @@ function spotifyThisSong(song) {
         }
 
         if (!data.tracks.items[0]) {
-            logThis('>>Error while retrieving data. Song not found.');
-            console.log('Error while retrieving data. Song not found.');
+            logThis(`>>No song called '${song}' could be found.`);
+            console.log(chalk`{red No song called {cyan ${song}} could be found.}`);
         }
         else {
             let artist = data.tracks.items[0].artists[0].name;
