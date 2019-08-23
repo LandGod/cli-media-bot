@@ -210,5 +210,3 @@ function mainLoop(opp=opperand, arg=argument) {
 }
 
 mainLoop();
-
-console.log('Made it to EOF with no (synchronous) errors!\n\n');
