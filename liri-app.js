@@ -92,7 +92,7 @@ function spotifyThisSong(song) {
 
             if (!preview) { preview = 'Preview Not Available' }
 
-            logThis(">>'" + songName + "'" + ' by ' + "'" + artist + "'" + '\n' + 'From the album ' + "'" + album + "'" + '\n' + 'Click here for a preview: ' + preview);
+            logThis(">>'" + songName + "'" + ' by ' + "'" + artist + "'" + '\n>>' + 'From the album ' + "'" + album + "'" + '\n>>' + 'Click here for a preview: ' + preview);
 
             console.log(chalk.cyan.bold(songName) + ' by ' + chalk.red(artist));
             console.log('From the album ' + chalk.magenta(album));
@@ -182,7 +182,7 @@ function movieThis(movieName) {
 
 // Do what it says
 function doWhatItSays() {
-    fs.readFile('random.txt', 'utf-8', (err,data) => {
+    fs.readFile('random.txt', 'utf-8', (err, data) => {
         let lines = data.split('\n');
         for (let i = 0; i < lines.length; i++) {
             let lineParts = lines[i].split(' ');
@@ -192,20 +192,31 @@ function doWhatItSays() {
 };
 
 // Main loop
-function mainLoop(opp=opperand, arg=argument) {
+function mainLoop(opp = opperand, arg = argument) {
     switch (opp) {
         case 'concert-this':
+            logThis(`Executing command '${opp}' with argument '${arg}'`);
             concertThis(arg);
             break;
         case 'spotify-this-song':
+            logThis(`Executing command '${opp}' with argument '${arg}'`);
             spotifyThisSong(arg);
             break;
         case 'movie-this':
+            logThis(`Executing command '${opp}' with argument '${arg}'`);
             movieThis(arg);
             break;
         case 'do-what-it-says':
+            logThis(`Executing command '${opp}'`);
             doWhatItSays();
             break;
+        default:
+            if (opp.trim() !== '') {
+                logThis(`>>Command '${opp}' not recognized.`)
+                console.log(chalk`Command {red.bold ${opp}} not recognized.`)
+            } else {
+                logThis('Blank line in random.txt was ignored.')
+            }
     };
 }
 
