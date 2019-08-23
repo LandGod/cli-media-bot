@@ -211,11 +211,11 @@ function mainLoop(opp = opperand, arg = argument) {
             doWhatItSays();
             break;
         default:
-            if (opp.trim() !== '') {
+            if (!opp || opp.trim() === '') {
+                logThis('Blank line in random.txt was ignored.')
+            } else {
                 logThis(`>>Command '${opp}' not recognized.`)
                 console.log(chalk`Command {red.bold ${opp}} not recognized.`)
-            } else {
-                logThis('Blank line in random.txt was ignored.')
             }
     };
 }
