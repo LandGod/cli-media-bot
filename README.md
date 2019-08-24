@@ -38,19 +38,19 @@ Note that results may not always be displayed in the order they were asked for a
 
 **concert-this:**
 
-![concert-this-demo](demos\concert-this-demo.gif)
+![concert-this-demo](https://github.com/LandGod/cli-media-bot/blob/master/demos/concert-this-demo.gif?raw=true)
 
 **spotify-this-song:**
 
-![spotify-this-demo](demos\spotify-this-demo.gif)
+![spotify-this-demo](https://github.com/LandGod/cli-media-bot/blob/master/demos/spotify-this-demo.gif?raw=true)
 
 **movie-this:**
 
-![movie-this-demo](demos\movie-this-demo.gif)
+![movie-this-demo](https://github.com/LandGod/cli-media-bot/blob/master/demos/movie-this-demo.gif?raw=true)
 
 **do-what-it-says**
 
-![do-what-it-says-demo](demos\do-what-it-says-demo.gif)
+![do-what-it-says-demo](https://github.com/LandGod/cli-media-bot/blob/master/demos/do-what-it-says-demo.gif?raw=true)
 
 ### Logging
 Every operation performed by `liri-app.js` is logged to a text file called `log.txt`. Here you can find a record of all queries and results you've ever made as long as you ran them in the same folder. Additionally, while many errors are suppressed on the CLI, they will be printed to log file, allowing you to see more information about why a particular request may have failed. 
