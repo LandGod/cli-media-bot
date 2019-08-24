@@ -34,6 +34,24 @@ Once you have entered all desired queries in the document and saved it, you can 
 
 Note that results may not always be displayed in the order they were asked for as information retrieval is done asynchronously.
 
+### Demos
+
+**concert-this:**
+
+![concert-this-demo](demos\concert-this-demo.gif)
+
+**spotify-this-song:**
+
+![spotify-this-demo](demos\spotify-this-demo.gif)
+
+**movie-this:**
+
+![movie-this-demo](demos\movie-this-demo.gif)
+
+**do-what-it-says**
+
+![do-what-it-says-demo](demos\do-what-it-says-demo.gif)
+
 ### Logging
 Every operation performed by `liri-app.js` is logged to a text file called `log.txt`. Here you can find a record of all queries and results you've ever made as long as you ran them in the same folder. Additionally, while many errors are suppressed on the CLI, they will be printed to log file, allowing you to see more information about why a particular request may have failed. 
 
