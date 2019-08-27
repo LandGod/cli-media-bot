@@ -155,21 +155,21 @@ function movieThis(movieName) {
                 let imdbPass;
                 let tomatoesPass;
                 if (parseFloat(ratingIMDB) > 5) {
-                    if (parseFloat(ratingIMDB) < 7) { imdbPass = chalk`{yellow ${ratingIMDB}}` }
-                    else { imdbPass = chalk`{green ${ratingIMDB}}` }
-                } else if (ratingIMDB) { imdbPass = chalk`{red ${ratingIMDB}}` }
-                else { imdbPass = chalk`{grey [not rated]}` }
+                    if (parseFloat(ratingIMDB) < 7) { imdbPass = chalk`was rated {yellow ${ratingIMDB}}` }
+                    else { imdbPass = chalk`was rated {green ${ratingIMDB}}` }
+                } else if (ratingIMDB) { imdbPass = chalk`was rated {red ${ratingIMDB}}` }
+                else { imdbPass = chalk`was {grey not rated}` }
 
                 if (parseFloat(ratingTomates) > 50) {
-                    if (parseFloat(ratingTomates) < 70) { tomatoesPass = chalk`{yellow ${ratingTomates}}` }
-                    else { tomatoesPass = chalk`{green ${ratingTomates}}` }
-                } else if (ratingTomates) { tomatoesPass = chalk`{red ${ratingTomates}}` }
-                else { tomatoesPass = chalk`{grey [not rated]}` }
+                    if (parseFloat(ratingTomates) < 70) { tomatoesPass = chalk`scored {yellow ${ratingTomates}}` }
+                    else { tomatoesPass = chalk`scored {green ${ratingTomates}}` }
+                } else if (ratingTomates) { tomatoesPass = chalk`scored {red ${ratingTomates}}` }
+                else { tomatoesPass = chalk`was {grey not rated}` }
 
 
-                logThis(`>>${title} was released in ${year}.\n>>It stars ${actors}.\n>>It was made in ${country} and is in ${lang}.\n>>It scored ${ratingIMDB} on IMDB and ${ratingTomates} on RottenTomatoes.\n>>Here is a brief summary of the plot:\n>>${plot}`);
+                logThis(`>>${title} was released in ${year}.\n>>It stars ${actors}.\n>>It was made in ${country} and is in ${lang}.\n>>It ${ratingIMDB} on IMDB and ${ratingTomates} on RottenTomatoes.\n>>Here is a brief summary of the plot:\n>>${plot}`);
 
-                console.log(chalk`{cyan.bold ${title}} was released in ${year}.\nIt stars {magenta ${actors}}.\nIt was made in ${country} and is available in ${lang}.\nIt scored ${imdbPass} on IMDB and ${tomatoesPass} on RottenTomatoes.\nHere is a brief summary of the plot:\n${plot}`);
+                console.log(chalk`{cyan.bold ${title}} was released in ${year}.\nIt stars {magenta ${actors}}.\nIt was made in ${country} and is available in ${lang}.\nIt ${imdbPass} on IMDB and ${tomatoesPass} on RottenTomatoes.\nHere is a brief summary of the plot:\n${plot}`);
 
 
             }
