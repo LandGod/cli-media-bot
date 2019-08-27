@@ -107,7 +107,7 @@ function movieThis(movieName) {
 
     if (movieName.trim() == '') { movieName = 'Mr. Nobody' };
 
-    let requestURL = "http://www.omdbapi.com/?t=" + movieName + "&apikey=trilogy";
+    let requestURL = "http://www.omdbapi.com/?t=" + movieName + "&type=movie&apikey=trilogy";
 
     // Asynchronous AJAX request
     axios
