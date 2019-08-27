@@ -157,13 +157,14 @@ function movieThis(movieName) {
                 if (parseFloat(ratingIMDB) > 5) {
                     if (parseFloat(ratingIMDB) < 7) { imdbPass = chalk`{yellow ${ratingIMDB}}` }
                     else { imdbPass = chalk`{green ${ratingIMDB}}` }
-                } else { imdbPass = chalk`{red ${ratingIMDB}}` }
+                } else if (ratingIMDB) { imdbPass = chalk`{red ${ratingIMDB}}` }
+                else { imdbPass = chalk`{grey [not rated]}` }
 
                 if (parseFloat(ratingTomates) > 50) {
                     if (parseFloat(ratingTomates) < 70) { tomatoesPass = chalk`{yellow ${ratingTomates}}` }
                     else { tomatoesPass = chalk`{green ${ratingTomates}}` }
-                } else { tomatoesPass = chalk`{red ${ratingTomates}}` }
-
+                } else if (ratingTomates) { tomatoesPass = chalk`{red ${ratingTomates}}` }
+                else { tomatoesPass = chalk`{grey [not rated]}` }
 
 
                 logThis(`>>${title} was released in ${year}.\n>>It stars ${actors}.\n>>It was made in ${country} and is in ${lang}.\n>>It scored ${ratingIMDB} on IMDB and ${ratingTomates} on RottenTomatoes.\n>>Here is a brief summary of the plot:\n>>${plot}`);
