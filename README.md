@@ -12,7 +12,9 @@ When using the program to obtain single results, one at a time, the user can ask
 ```
 node liri-app.js operation-desired any number of search terms
 ```
-Here `node liri-app.js` is how we start our program. This text must be entered exactly as shown, and the user must have the directory containing the `liri-app.js` file as the current working directory. The first argument following these calls specifies one of the three operations that the user can request. At least one additional argument must be supplied, which is either the title or band/artist the user would like information about. Any additional arguments after the first search term will be concatenated to the first, inclusive of spaces, and treated as a single search query.
+Here `node liri-app.js` is how we start our program. This text must be entered exactly as shown, and the user must have the directory containing the `liri-app.js` file as the current working directory. The first argument following these calls specifies one of the three operations that the user can request. At least one additional argument must be supplied, which is either the title or band/artist the user would like information about. Any additional arguments after the first search term will be concatenated to the first, inclusive of spaces, and treated as a single search query. 
+
+Note: If you would like to use any special characters in your search, please enclose the character or word in single-quotes to avoid undefined behavior. For example: `node liri-app.js movie-this sh!t` will cause the program to behave incorrectly, but `node liri-app.js movie-this 'sh!t'` will return information about the 2017 Canadian film.
 
 The following are the 3 valid arguments for desired operation:
 * `concert-this` - Asks for information about concerts for the given artist/band.
